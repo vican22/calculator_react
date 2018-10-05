@@ -34,7 +34,7 @@ class App extends Component {
   handleClick = e => {
     try {
       const val = e.target.getAttribute("data-value");
-      //console.log(val);
+      // console.log(val);
 
       if (val === "equal") {
         this.calcValue();
@@ -54,12 +54,34 @@ class App extends Component {
         });
         console.log(res);
       } else {
-        const newStore = this.state.store;
-        //console.log(val);
+        let newStore = this.state.store;
+        // console.log(val);
         newStore.push(val);
+        //console.log(newStore[newStore.length - 1]);
+        //const operators = ["+", "-", "*", "/"];
 
         // console.log(newStore);
+        // if (val === "+" || val === "-" || val === "*" || val === "*") {
+        //   if (newStore[newStore.length - 2] === val) {
+        //     newStore.pop();
+        //   }
+        // }
 
+        if (
+          val === "+" ||
+          val === "-" ||
+          val === "*" ||
+          val === "*" ||
+          val === "%" ||
+          val === "."
+        ) {
+          if (newStore[newStore.length - 2] === newStore[newStore.length - 1]) {
+            newStore.pop();
+            //newStore = this.state.store;
+          }
+        }
+
+        console.log(newStore);
         this.setState({
           store: newStore
         });
@@ -71,7 +93,7 @@ class App extends Component {
 
   render() {
     const list = this.state.history.map((val, index) => {
-      console.log(val);
+      // console.log(val);
       return <li key={index}>{val} </li>;
     });
 
